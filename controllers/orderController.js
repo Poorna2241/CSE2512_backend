@@ -41,12 +41,6 @@ export async function createOrder(req, res) {
 				});
 			}
 
-			//check if stock is available
-			// if(product.stock < req.body.items[i].quantity){
-			//     return res.status(400).json({
-			//         message : `Only ${product.stock} items available for product ID ${req.body.items[i].productID}`
-			//     })
-			// }
 
 			items.push({
 				productID: product.productID,
@@ -76,12 +70,6 @@ export async function createOrder(req, res) {
 
 		await newOrder.save();
 
-		// for (let i = 0; i < items.length; i++){
-		//     await Product.updateOne(
-		//         { productID : items[i].productID },
-		//         { $inc : { stock : -items[i].quantity } }
-		//     )
-		// }
 
 		return res.json({
 			message: "Order placed successfully",
