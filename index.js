@@ -30,48 +30,48 @@ app.use(cors())
 app.use(express.json())
 
 
-// app.use(
-//     (req,res,next)=>{
+app.use(
+    (req,res,next)=>{
 
-//         const authorizationHeader = req.header("Authorization")
+        const authorizationHeader = req.header("Authorization")
 
-//         if(authorizationHeader != null){
+        if(authorizationHeader != null){
 
-//             const token = authorizationHeader.replace("Bearer ", "")
+            const token = authorizationHeader.replace("Bearer ", "")
 
-//             jwt.verify(token, process.env.JWT_SECRET,
-//                 (error, content)=>{
+            jwt.verify(token, process.env.JWT_SECRET,
+                (error, content)=>{
 
-//                     if(content == null){
+                    if(content == null){
 
-//                         res.status(401).json({
-//                             message : "invalid token"
-//                         })
+                        res.status(401).json({
+                            message : "invalid token"
+                        })
 
-//                     }else{
+                    }else{
                         
-//                         req.user = content
+                        req.user = content
 
-//                         next()
-//                     }
-//                 }
-//             )
-//         }else{
-//             next()
-//         }
+                        next()
+                    }
+                }
+            )
+        }else{
+            next()
+        }
 
-//     }
-// )
-
-
-
-// app.use("/api/users",userRouter)
-// app.use("/api/products",productRouter)
-// app.use("/api/orders",orderRouter)
+    }
+)
 
 
-// app.listen(3000 , 
-//     ()=>{
-//         console.log("server is running")
-//     }
-// )
+
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
+app.use("/api/orders",orderRouter)
+
+
+app.listen(3000 , 
+    ()=>{
+        console.log("server is running")
+    }
+)
